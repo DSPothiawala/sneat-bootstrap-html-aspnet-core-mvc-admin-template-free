@@ -15,8 +15,24 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[menu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[module]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Users]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetMenuItem]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetSubMenuItem]",
+         "ObjectType": 1
       }
    ],
    "UiHint": null,

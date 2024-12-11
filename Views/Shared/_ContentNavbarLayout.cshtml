@@ -1,3 +1,11 @@
+@inject CoreDataContextProcedures MenuService
+
+@{
+    // var userRole = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Role)?.Value : null;
+    var menuItems = MenuService.GetMenuItemAsync(1).Result;
+}
+
+
 @await Html.PartialAsync("Sections/_Variables")
 @{
   TempData.Keep();
@@ -38,7 +46,7 @@
 
     @if (isMenu)
     {
-      @await Html.PartialAsync("Sections/Menu/_VerticalMenu")
+      @await Html.PartialAsync("Sections/Menu/_VerticalMenu", menuItems)
     }
 
     <!-- Layout page -->

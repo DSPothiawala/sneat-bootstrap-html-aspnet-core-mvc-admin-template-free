@@ -1,3 +1,12 @@
+@model List<AspnetCoreMvcFull.Models.GetMenuItemResult>
+
+@inject CoreDataContextProcedures MenuService
+
+@{
+    // var userRole = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Role)?.Value : null;
+    var submenuItems = MenuService.GetSubMenuItemAsync(1).Result;
+}
+
 @{
   TempData.Keep();
   string? currentPage = ViewContext.HttpContext.Request.Path;
@@ -26,6 +35,47 @@
 
   @* ! Full version menu-items *@
   <ul class="menu-inner py-1">
+        <!-- Dynamic -->
+        @foreach (var item in Model)
+        {
+            <li class='menu-item@(currentPage.EndsWith("/") || currentPage.StartsWith(@item.nameLink) ? " active open" : "")'>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="@item.icon"></i>
+                    <div class="text-truncate" data-i18n="@item.name">@item.name</div>
+                    <span class="@item.sumcss">5</span>
+                </a>
+
+                <ul class="menu-sub">
+                    @foreach (var subItem in submenuItems)
+                    {
+                        if (subItem.moduleid == item.id)
+                        {
+                          <li class='menu-item@(currentPage == "/" ? " active" : "")'>
+                              <a asp-controller="@subItem.controller" asp-action="@subItem.action" class="menu-link">
+                                  <div>@subItem.name</div>
+                              </a>
+                          </li>
+                        }
+                    }
+                </ul>
+@*                 @if (item.Menus.Any())
+                {
+                    <ul class="menu-sub">
+                        @foreach (var subItem in item.Menus)
+                        {
+                            <li class='menu-item@(currentPage == "/" ? " active" : "")'>
+                                <a asp-controller="@subItem.Controller" asp-action="@subItem.Action" class="menu-link">
+                                <div>Analytics</div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                } *@
+
+            </li>
+        }
+
+
     <!-- Dashboards -->
     <li class='menu-item@(currentPage.EndsWith("/") || currentPage.StartsWith("/Dashboards/") ? " active open" : "")'>
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -196,7 +246,7 @@
           <a asp-controller="Auth" asp-action="LoginBasic" class="menu-link" target="_blank">
             <div>Login</div>
           </a>
-        </li>
+        </li> 
         <li class='menu-item@(currentPage == "/Auth/RegisterBasic" ? " active" : "")'>
           <a asp-controller="Auth" asp-action="RegisterBasic" class="menu-link" target="_blank">
             <div>Register</div>
