@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System.Security.Claims;
 
 namespace CoreApp.Controllers
@@ -21,30 +22,30 @@ namespace CoreApp.Controllers
         [HttpPost]
         public IActionResult Index(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+          if (ModelState.IsValid)
+          {
+            var user = _context.Users.Where(x => (x.UserName == model.UserNameOrEmail || x.UserEmail == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
+
+            if (user != null)
             {
-                var user = _context.Users.Where(x => (x.UserName == model.UserNameOrEmail || x.UserEmail == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
+              //success, cresate cookie
+              var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.UserName),
+                            new Claim(ClaimTypes.Email, user.UserEmail),
+                            new Claim(ClaimTypes.Role, "User"),
+                        };
 
-                if (user != null)
-                {
-                    //success, cresate cookie
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, user.UserEmail),
-                        new Claim("Name", user.UserName),
-                        new Claim(ClaimTypes.Role, "User"),
-                    };
+              var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+              HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-                     return RedirectToAction("Index", "Dashboards");
-        }
-                else
-                {
-                    ModelState.AddModelError("", "Username/Email or Password is not correct.");
-                }
+              return RedirectToAction("Index", "Dashboards");
             }
+            else
+            {
+              ModelState.AddModelError("", "Username/Email or Password is not correct.");
+            }
+          }
             return View();
         }
 
