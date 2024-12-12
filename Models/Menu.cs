@@ -23,5 +23,7 @@ public partial class Menu
 
     public string Namelink { get; set; }
 
+    public string Target { get; set; }
+
     public virtual Module Module { get; set; }
 }

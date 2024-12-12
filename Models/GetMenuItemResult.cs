@@ -16,5 +16,6 @@ namespace AspnetCoreMvcFull.Models
         public string subname { get; set; }
         public string nameclass { get; set; }
         public string namehref { get; set; }
+        public string target { get; set; }
     }
 }

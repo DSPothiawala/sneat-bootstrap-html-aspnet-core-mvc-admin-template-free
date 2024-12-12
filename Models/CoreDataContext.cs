@@ -41,6 +41,7 @@ public partial class CoreDataContext : DbContext
             entity.Property(e => e.Subnameclass)
                 .HasMaxLength(100)
                 .HasColumnName("subnameclass");
+            entity.Property(e => e.Target).HasColumnName("target");
 
             entity.HasOne(d => d.Module).WithMany(p => p.Menus)
                 .HasForeignKey(d => d.Moduleid)
@@ -72,6 +73,7 @@ public partial class CoreDataContext : DbContext
             entity.Property(e => e.Sumcss)
                 .HasMaxLength(200)
                 .HasColumnName("sumcss");
+            entity.Property(e => e.Target).HasColumnName("target");
         });
 
         modelBuilder.Entity<User>(entity =>

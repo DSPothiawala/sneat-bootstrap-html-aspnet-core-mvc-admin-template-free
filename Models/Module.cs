@@ -25,5 +25,7 @@ public partial class Module
 
     public string Namehref { get; set; }
 
+    public string Target { get; set; }
+
     public virtual ICollection<Menu> Menus { get; set; } = new List<Menu>();
 }
