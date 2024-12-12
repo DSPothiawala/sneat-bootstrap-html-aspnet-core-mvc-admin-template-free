@@ -36,7 +36,11 @@ public partial class CoreDataContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
+            entity.Property(e => e.Namelink).HasColumnName("namelink");
             entity.Property(e => e.Sort).HasColumnName("sort");
+            entity.Property(e => e.Subnameclass)
+                .HasMaxLength(100)
+                .HasColumnName("subnameclass");
 
             entity.HasOne(d => d.Module).WithMany(p => p.Menus)
                 .HasForeignKey(d => d.Moduleid)
@@ -57,7 +61,14 @@ public partial class CoreDataContext : DbContext
             entity.Property(e => e.NameLink)
                 .HasMaxLength(200)
                 .HasColumnName("nameLink");
+            entity.Property(e => e.Nameclass)
+                .HasMaxLength(200)
+                .HasColumnName("nameclass");
+            entity.Property(e => e.Namehref).HasColumnName("namehref");
             entity.Property(e => e.Sort).HasColumnName("sort");
+            entity.Property(e => e.Subname)
+                .HasMaxLength(200)
+                .HasColumnName("subname");
             entity.Property(e => e.Sumcss)
                 .HasMaxLength(200)
                 .HasColumnName("sumcss");

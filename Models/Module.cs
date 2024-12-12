@@ -19,5 +19,11 @@ public partial class Module
 
     public string Sumcss { get; set; }
 
+    public string Subname { get; set; }
+
+    public string Nameclass { get; set; }
+
+    public string Namehref { get; set; }
+
     public virtual ICollection<Menu> Menus { get; set; } = new List<Menu>();
 }

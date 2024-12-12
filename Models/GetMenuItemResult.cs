@@ -13,5 +13,8 @@ namespace AspnetCoreMvcFull.Models
         public string icon { get; set; }
         public byte? sort { get; set; }
         public string sumcss { get; set; }
+        public string subname { get; set; }
+        public string nameclass { get; set; }
+        public string namehref { get; set; }
     }
 }

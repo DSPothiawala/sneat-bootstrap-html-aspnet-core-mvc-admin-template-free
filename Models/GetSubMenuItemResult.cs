@@ -13,5 +13,7 @@ namespace AspnetCoreMvcFull.Models
         public string controller { get; set; }
         public string action { get; set; }
         public byte? sort { get; set; }
+        public string subnameclass { get; set; }
+        public string namelink { get; set; }
     }
 }

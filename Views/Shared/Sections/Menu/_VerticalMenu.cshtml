@@ -3,13 +3,19 @@
 @inject CoreDataContextProcedures MenuService
 
 @{
+
     // var userRole = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Role)?.Value : null;
+
     var submenuItems = MenuService.GetSubMenuItemAsync(1).Result;
+
 }
 
 @{
-  TempData.Keep();
-  string? currentPage = ViewContext.HttpContext.Request.Path;
+
+    TempData.Keep();
+
+    string? currentPage = ViewContext.HttpContext.Request.Path;
+
 }
 
 <!-- Menu -->
@@ -38,24 +44,46 @@
         <!-- Dynamic -->
         @foreach (var item in Model)
         {
-            <li class='menu-item@(currentPage.EndsWith("/") || currentPage.StartsWith(@item.nameLink) ? " active open" : "")'>
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <li class='menu-item@(currentPage.StartsWith(@item.nameLink) ? " active open" : "")'>
+                <a href="@item.namehref" class="@item.nameclass">
                     <i class="@item.icon"></i>
                     <div class="text-truncate" data-i18n="@item.name">@item.name</div>
-                    <span class="@item.sumcss">5</span>
+                    @if (@item.sumcss != null)
+                    {                        
+                      <span class="@item.sumcss">@item.subname</span>
+                    }
                 </a>
 
                 <ul class="menu-sub">
-                    @foreach (var subItem in submenuItems)
+                    @foreach (var subItem in submenuItems.Where(x => x.moduleid == item.id))
                     {
-                        if (subItem.moduleid == item.id)
+                        string? data = "/" + @subItem.controller + "/" + @subItem.action;
+                        @if (@subItem.action == "Index")
                         {
-                          <li class='menu-item@(currentPage == "/" ? " active" : "")'>
-                              <a asp-controller="@subItem.controller" asp-action="@subItem.action" class="menu-link">
-                                  <div>@subItem.name</div>
-                              </a>
-                          </li>
+                            data = "/" + @subItem.controller + "";
                         }
+                        <li class='menu-item@(currentPage == @data ? " active" : "")'>
+                          @if (@subItem.namelink == null)
+                          {
+                            <a asp-controller="@subItem.controller" asp-action="@subItem.action" class="menu-link">
+                                <div>@subItem.name</div>
+                                  @if (@subItem.subnameclass != null)
+                                  {
+                                      <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto text-uppercase">Pro</div>
+                                  }
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@subItem.namelink" target="_blank" class="menu-link">
+                                    <div>@subItem.name</div>
+                                    @if (@subItem.subnameclass != null)
+                                    {
+                                        <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto text-uppercase">Pro</div>
+                                    }
+                                </a>
+                            }
+                        </li>
                     }
                 </ul>
 @*                 @if (item.Menus.Any())

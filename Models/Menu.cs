@@ -19,5 +19,9 @@ public partial class Menu
 
     public byte? Sort { get; set; }
 
+    public string Subnameclass { get; set; }
+
+    public string Namelink { get; set; }
+
     public virtual Module Module { get; set; }
 }
