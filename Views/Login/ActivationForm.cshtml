@@ -1,0 +1,48 @@
+@model AspnetCoreMvcFull.ViewModel.LoginViewModel
+
+@{
+	Layout = "_BlankLayout";
+
+	ViewData["Title"] = "Activate From";
+}
+
+
+@section PageStyles {
+	<link rel="stylesheet" href="~/vendor/css/pages/page-auth.css">
+}
+
+@* ************** Content ************** *@
+
+<div class="container-xxl">
+	<div class="authentication-wrapper authentication-basic container-p-y">
+		<div class="authentication-inner">
+			<!-- Register -->
+			<div class="card px-sm-6 px-0">
+				<div class="card-body">
+					<!-- Logo -->
+			
+					<!-- /Logo -->
+					<h4 class="mb-1">Welcome to @TempData.Peek("appName")! 👋</h4>
+					@{
+						if (TempData["msg2"] != null)
+						{
+							<p class="mb-6">@TempData.Peek("msg2")</p>
+						}
+
+					}
+					
+
+					<form id="formAuthentication" class="mb-6" asp-action="ActivationForm">
+						
+						<div class="mb-6">
+							<button class="btn btn-primary d-grid w-100" type="submit">Submit</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+			<!-- /Register -->
+		</div>
+	</div>
+</div>
+

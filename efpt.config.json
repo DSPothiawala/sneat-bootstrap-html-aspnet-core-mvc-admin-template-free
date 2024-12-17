@@ -27,6 +27,18 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[getdumpdatalive]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[getdumpdataoffline]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[getdumpdataonline]",
+         "ObjectType": 1
+      },
+      {
          "Name": "[dbo].[GetMenuItem]",
          "ObjectType": 1
       },

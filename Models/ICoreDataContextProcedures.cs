@@ -13,6 +13,9 @@ namespace AspnetCoreMvcFull.Models
 {
     public partial interface ICoreDataContextProcedures
     {
+        Task<List<getdumpdataliveResult>> getdumpdataliveAsync(string svalue1, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+        Task<List<getdumpdataofflineResult>> getdumpdataofflineAsync(string svalue, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+        Task<List<getdumpdataonlineResult>> getdumpdataonlineAsync(string svalue1, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
         Task<List<GetMenuItemResult>> GetMenuItemAsync(int? userid, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
         Task<List<GetSubMenuItemResult>> GetSubMenuItemAsync(int? userid, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
     }

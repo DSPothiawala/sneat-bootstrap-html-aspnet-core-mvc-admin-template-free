@@ -19,29 +19,9 @@ public partial class User
 
     public DateTime? Creatdate { get; set; }
 
-    public string CreateUser { get; set; }
-
     public int? TypeId { get; set; }
 
     public string Phone { get; set; }
 
     public bool IsAdmin { get; set; }
-
-    public string AndroidId { get; set; }
-
-    public string AndroidDevice { get; set; }
-
-    public bool? IsBiometric { get; set; }
-
-    public bool? IsAutoSignIn { get; set; }
-
-    public int? Pin { get; set; }
-
-    public bool? IsScreenShot { get; set; }
-
-    public int? CompanyId { get; set; }
-
-    public int? SpersonId { get; set; }
-
-    public int? LocationId { get; set; }
 }

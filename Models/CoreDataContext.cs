@@ -80,28 +80,18 @@ public partial class CoreDataContext : DbContext
         {
             entity.HasIndex(e => e.UserName, "IX_Users").IsUnique();
 
+            entity.HasIndex(e => e.Creatdate, "IX_Users_CreateDate").IsUnique();
+
             entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.AndroidDevice).IsUnicode(false);
-            entity.Property(e => e.AndroidId)
-                .IsUnicode(false)
-                .HasColumnName("AndroidID");
-            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
-            entity.Property(e => e.Creatdate).HasColumnType("datetime");
-            entity.Property(e => e.CreateUser)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.IsAutoSignIn).HasDefaultValue(false);
-            entity.Property(e => e.IsBiometric).HasDefaultValue(false);
-            entity.Property(e => e.IsScreenShot).HasDefaultValue(false);
-            entity.Property(e => e.LocationId).HasColumnName("LocationID");
+            entity.Property(e => e.Creatdate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.Password)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Phone)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.Pin).HasColumnName("PIN");
-            entity.Property(e => e.SpersonId).HasColumnName("SPersonID");
             entity.Property(e => e.TypeId).HasColumnName("TypeID");
             entity.Property(e => e.UserEmail)
                 .HasMaxLength(150)
